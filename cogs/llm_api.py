@@ -1,4 +1,6 @@
 from discord.ext import commands
+from typing_extensions import Optional
+from personality.personality import Personality, load_personalities
 
 from api.prediction import llm_ask
 
@@ -10,6 +12,7 @@ class LlmApi(commands.Cog):
     @commands.Cog.listener()
     async def on_ready(self):
         print("[LLM] Chargement de l'API du LLM ...")
+        # Vérifier si l'API du LLM fonctionne
         self.init_request()
 
     def init_request(self):

@@ -6,6 +6,20 @@ HUGGING_FACE_CLIENT_ID: str = "yuntian-deng/ChatGPT4"
 LLM_NUCLEUS_SMAPLING: float = 1
 LLM_TEMPERATURE: float = 1
 
-
 # Paramètres de chemin de fichiers
 DEFAULT_TOKEN_FILE_PATH: str = "config/token.txt"
+DEFAULT_PERSONALITIES_FILE_PATH: str = "config/personalities.json"
+
+# Paramètres de messages
+LLM_MUTED_CHANNELS = [
+
+]
+LLM_IGNORED_MEMBERS = [
+
+]
+
+
+# Modification des paramètres de debug
+def set_debug_mode(mode: bool) -> None:
+    global DEBUG_MODE
+    DEBUG_MODE = mode
