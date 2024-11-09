@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SshConfigs">
+    <configs>
+      <sshConfig authType="PASSWORD" host="dibou.freeboxos.fr" id="66aed973-b704-448c-a7c3-c4ccf6265a50" port="56487" nameFormat="DESCRIPTIVE" username="aymeric" useOpenSSHConfig="true" />
+    </configs>
+  </component>
+</project>

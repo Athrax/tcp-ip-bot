@@ -26,17 +26,23 @@ async def load():
 
 # Fonction principale
 async def main():
-    print("[MAIN] Chargment du bot ...")
+    # Compteur d'erreur
+    error_cpt: int = 0
+
     # Charger les modules
+    print("[MAIN] Chargement du bot ...")
     await load()
+
     # Lancer le bot
     while True:
         try:
             await bot.start(token_loader(DEFAULT_TOKEN_FILE_PATH))
         except Exception as e:
-            print(f"[MAIN] Erreur : {e}")
-            await asyncio.sleep(3)
+            error_cpt += 1
+            wait_for = 2**error_cpt
 
+            print(f"[MAIN] Erreur : {e}\n[MAIN] Attente de {wait_for} secondes")
+            await asyncio.sleep(wait_for)
 
 if __name__ == '__main__':
     asyncio.run(main())
