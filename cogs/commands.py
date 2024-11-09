@@ -50,7 +50,7 @@ class Commands(commands.Cog):
                 await self.bot.user.edit(avatar=avatar)
                 await self.bot.user.edit(username=selected_personality.name.capitalize())
                 await interaction.followup.send(
-                    content=f"La personnalité du bot a été modifiée : [\n{selected_personality.description[:100]}...]",
+                    content=f"La personnalité du bot a été modifiée : [{selected_personality.description[:100]}...]",
                     ephemeral=True
                 )
                 self.current_personality = selected_personality
@@ -68,11 +68,20 @@ class Commands(commands.Cog):
 
     @app_commands.command(name="debug", description="Activer le mode debug")
     async def debug(self, ctx: discord.Interaction, mode: bool):
-        print("[COMMANDE] Commande debug reçue")
-        await ctx.response.send_message(content=f"Le mode debug est {'activé.' if mode else 'désactivé.'}",
+        try:
+            print("[COMMANDE] Commande debug reçue")
+            set_debug_mode(mode)
+            await ctx.response.send_message(content="Mode debug modifié", ephemeral=True)
+            print(f"[DEBUG] Mode debug {'activé' if mode else 'désactivé'}")
+        except Exception as e:
+            print(f"[DEBUG] Erreur : {e}")
+
+    @app_commands.command(name="say", description="Envoyer un message dans un salon spécifique")
+    async def say(self, ctx: discord.Interaction, channel: discord.TextChannel, message: str):
+        print("[COMMANDE] Commande say reçue")
+        await channel.send(message)
+        await ctx.response.send_message(content=f"<#{channel.id}> <@{ctx.user.id}> {message}",
                                         ephemeral=True)
-        print(f"[DEBUG] Mode debug {'activé' if mode else 'désactivé'}")
-        set_debug_mode(mode)
 
 
 async def setup(bot: commands.Bot):

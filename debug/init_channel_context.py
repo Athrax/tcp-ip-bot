@@ -8,3 +8,6 @@ dict = {
 # Exporter
 with open('data.json', 'w') as f:
     json.dump(dict, f)
+
+result = json.loads(open('data.json').read())
+print(result["channel"])
